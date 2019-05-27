@@ -31,11 +31,11 @@ public class Main {
 		// TODO Auto-generated method stub
 		double t1 = System.nanoTime();
 		Instance inst = load_instance("data/E-n101-k14.vrp");
-		//ÉèÖÃÄ£Ê½²ÎÊı
+		//è®¾ç½®æ¨¡å¼å‚æ•°ã€‚
 		inst.parameter.Mode.multi_thread_enable = false;
-		//ÉèÖÃ³õÊ¼½â²ÎÊı
+		//è®¾ç½®åˆå§‹è§£å‚æ•°ã€‚
 		inst.parameter.InitialSolution.log_print = false;
-		//ÉèÖÃ½û¼ÉËÑË÷²ÎÊı
+		//è®¾ç½®ç¦å¿Œæœç´¢å‚æ•°ã€‚
 		inst.parameter.TabuSearch.maximum_iteration = 2000;
 		inst.parameter.TabuSearch.maximum_tabu_tenure = 50;
 		inst.parameter.TabuSearch.tenure_decay_rate = 0.99;
@@ -44,7 +44,7 @@ public class Main {
 		inst.parameter.TabuSearch.minimum_shake_iteration = 100;
 		inst.parameter.TabuSearch.log_print = true;
 		inst.parameter.TabuSearch.log_detail = false;
-		//ÉèÖÃËã×Ó²ÎÊı
+		//è®¾ç½®ç®—å­å‚æ•°ã€‚
 		inst.parameter.Operator.insertion_prune_threshhold = 1e6;
 		inst.parameter.Operator.exchange_prune_threshhold = 1e6;
 		inst.parameter.Operator.cross_prune_threshhold = 1e6;
@@ -52,14 +52,14 @@ public class Main {
 		inst.parameter.Operator.route_cross_threshhold = 1e6;
 		
 		
-		//¹¹ÔìÔ¼ÊøÌõ¼ş
+		//æ„é€ çº¦æŸæ¡ä»¶ã€‚
 		Constraint[] cnts = new Constraint[2];
 		MinimizeFuelCost.ConstraintData dat = new MinimizeFuelCost.ConstraintData(inst.d, inst.q, 1.51, 17.22);
 		cnts[0] = new MinimizeFuelCost(dat, 1);
 		CapacityConstraint.ConstraintData cap_dat = new CapacityConstraint.ConstraintData(inst.q, inst.Q);
 		cnts[1] = new CapacityConstraint(cap_dat, true, 100);
 		
-		//¹¹ÔìËã·¨Ëã×Ó
+		//æ„é€ ç®—æ³•ç®—å­ã€‚
 		Operator[] operators = new Operator[4];
 		double[] coefs = new double[4];
 		operators[0] = new RelocateBase(inst);
@@ -71,7 +71,7 @@ public class Main {
 		operators[3] = new RelocateBaseIntra(inst);
 		coefs[3] = 1;
 		
-		//¹¹ÔìĞèÒª·ÃÎÊµÄ½Úµã¼¯ºÏ
+		//æ„é€ éœ€è¦è®¿é—®çš„èŠ‚ç‚¹é›†åˆã€‚
 		ArrayList<Atr> atrs = new ArrayList<Atr>();
 		for(int i = 1; i < inst.n; i++){
 			atrs.add(new Atr(i));
@@ -80,14 +80,14 @@ public class Main {
 		for(int i = 1; i < inst.n; i++)
 			exc[i] = true;
 		
-		//¹¹Ôì³õÊ¼½â
+		//æ„é€ åˆå§‹è§£ã€‚
 		Greedy greedy = new Greedy(inst, new InsertBase(inst, cnts));
 		ArrayList<Route> s = greedy.generate(atrs);
 		System.out.println(greedy.toString(s));
 		greedy.check(s, true, exc);
 		System.out.println("feasibility of the initial solution>>>" + greedy.is_feasible(s) + "\t" + s.size() + "\t" + greedy.get_total_cost(s));
 		
-		//×îĞ¡»¯ĞĞÊ»¾àÀë
+		//æœ€å°åŒ–è¡Œé©¶è·ç¦»ã€‚
 		TabuSearch tabu = new TabuSearch(inst, operators, coefs);
 		s = toDeep(inst, s);
 		tabu.check(s, true, exc);
