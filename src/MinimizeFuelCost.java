@@ -6,29 +6,29 @@ import nju.lzx.Utility.Reference;
 
 public class MinimizeFuelCost extends AbstractConstraint implements Base {
 
-	/** Ô¼ÊøµÄÎÊÌâÊı¾İ¡£ */
+	/** çº¦æŸçš„é—®é¢˜æ•°æ®ã€‚ */
 	protected ConstraintData dat;
 	
-	/** fq[i]£º´Ó²Ö¿âµ½µÚi¸ö½ÚµãµÄĞèÇóÖ®ºÍ¡£*/
+	/** fq[i]ï¼šä»ä»“åº“åˆ°ç¬¬iä¸ªèŠ‚ç‚¹çš„éœ€æ±‚ä¹‹å’Œã€‚*/
 	protected double[] fq;
 	
-	/** bd[i]£º´ÓµÚi¸ö½áµã»Øµ½²Ö¿âµÄ¾àÀë¡£ */
+	/** bd[i]ï¼šä»ç¬¬iä¸ªç»“ç‚¹å›åˆ°ä»“åº“çš„è·ç¦»ã€‚ */
 	protected double[] bd;
 	
 	
 	public static class ConstraintData{
 		
-		/** ½ÚµãĞèÇó */
+		/** èŠ‚ç‚¹éœ€æ±‚ã€‚ */
 		public double[] q;
 		
-		/** ¾àÀë¾ØÕó */
+		/** è·ç¦»çŸ©é˜µã€‚ */
 		public double[][] d;
 		
-		/** ³É±¾·½³ÌĞ±ÂÊ */
+		/** æˆæœ¬æ–¹ç¨‹æ–œç‡ã€‚ */
 		public double a;
 		
 		
-		/** ³É±¾·½³Ì½Ø¾à */
+		/** æˆæœ¬æ–¹ç¨‹æˆªè·ã€‚ */
 		public double b;
 		
 		public ConstraintData(double[][] _d, double[] _q, double _a, double _b){
