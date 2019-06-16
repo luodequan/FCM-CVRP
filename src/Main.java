@@ -88,7 +88,7 @@ public class Main {
 		System.out.println("feasibility of the initial solution>>>" + greedy.is_feasible(s) + "\t" + s.size() + "\t" + greedy.get_total_cost(s));
 		
 		//最小化行驶距离。
-		TabuSearch tabu = new TabuSearch(inst, operators, coefs);
+		TabuSearch tabu = new TabuSearch(inst, operators, coefs, null);
 		s = toDeep(inst, s);
 		tabu.check(s, true, exc);
 		for(int i = 0; i < s.size(); i++){
